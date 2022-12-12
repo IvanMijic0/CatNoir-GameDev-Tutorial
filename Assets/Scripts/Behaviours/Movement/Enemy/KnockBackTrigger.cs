@@ -18,7 +18,7 @@ namespace Behaviours.Movement.Enemy
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            var player = other.collider.GetComponent<PlatformMovement>();
+            var player = other.collider.GetComponent<PlayerMovement>();
 
             if (player != null)
             {

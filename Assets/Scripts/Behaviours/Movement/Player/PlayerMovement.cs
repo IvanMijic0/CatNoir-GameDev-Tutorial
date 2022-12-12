@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Behaviours.Movement
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlatformMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
       private Rigidbody2D _rigidbody2D;
       private ICheck _groundCheck;

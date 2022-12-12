@@ -53,15 +53,15 @@ namespace Behaviours.Movement
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            var platformMovement = other.collider.GetComponent<PlatformMovement>();
-            if (platformMovement != null){
-                platformMovement.SetParent(transform);
+            var playerMovement = other.collider.GetComponent<PlayerMovement>();
+            if (playerMovement != null){
+                playerMovement.SetParent(transform);
             }
         }
 
         private void OnCollisionExit2D(Collision2D other)
         {
-            var platformMovement = other.collider.GetComponent<PlatformMovement>();
+            var platformMovement = other.collider.GetComponent<PlayerMovement>();
             if (platformMovement != null){
                 platformMovement.ResetParent();
             }

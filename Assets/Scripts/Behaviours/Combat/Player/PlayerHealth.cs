@@ -14,13 +14,13 @@ namespace Behaviours.Combat.Player
         public int hitPoints = 3;
         [SerializeField] private float delay = 5f;
         [SerializeField] private Animator anim;
-        [SerializeField] private PlatformMovement playerMove;
+        [SerializeField] private PlayerMovement playerMove;
         [SerializeField] private PlayerProjectileFire proj;
 
         public void Awake()
         {
             anim = GetComponentInChildren<Animator>();
-            playerMove = GameObject.Find("Player").GetComponent<PlatformMovement>();
+            playerMove = GameObject.Find("Player").GetComponent<PlayerMovement>();
             proj = GameObject.Find("Player").GetComponent<PlayerProjectileFire>();
         }
 

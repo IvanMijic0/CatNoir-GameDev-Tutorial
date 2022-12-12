@@ -1,5 +1,4 @@
-﻿using System;
-using Interfaces;
+﻿using Interfaces;
 using UnityEngine;
 
 namespace Behaviours.Movement.Enemy
@@ -14,15 +13,10 @@ namespace Behaviours.Movement.Enemy
         [SerializeField] private float checkDistance = .05f;
         
         private Transform _targetWaypoint;
-        private Rigidbody2D _rigidbody2D;
-        private int _currentWaypointIndex = 0;
+        private int _currentWaypointIndex ;
 
+        
         private void Awake()
-        {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
-        }
-
-        private void Start()
         {
             _targetWaypoint = waypoints[0];
         }

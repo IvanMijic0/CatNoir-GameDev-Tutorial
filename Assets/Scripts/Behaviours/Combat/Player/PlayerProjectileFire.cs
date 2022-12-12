@@ -13,7 +13,7 @@ namespace Behaviours.Combat.Player
         [Header("Projectile")]
         [SerializeField] private ProjectileBehaviour projectilePrefab;
         [SerializeField] private Transform launchOffset;
-        [SerializeField] private PlatformMovement player;
+        [SerializeField] private PlayerMovement player;
         private AudioManager audioManager;
 
         public void Start()

@@ -13,9 +13,8 @@ namespace GUI
        
         [SerializeField] private GameObject PauseMenuUI;
         [SerializeField] private GameObject OptionsMenuUI;
-        [SerializeField] private AudioSource soundEffects;
         [SerializeField] private AudioSource buttonClick;
-        [SerializeField] private PlatformMovement playerMove;
+        [SerializeField] private PlayerMovement playerMove;
         [SerializeField] private PlayerProjectileFire proj;
         
         public static bool GamePaused = false;
@@ -29,7 +28,7 @@ namespace GUI
             OptionsMenuUI.SetActive(false);
             audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
             music = GameObject.Find("Music").GetComponent<AudioSource>();
-            playerMove = GameObject.Find("Player").GetComponent<PlatformMovement>();
+            playerMove = GameObject.Find("Player").GetComponent<PlayerMovement>();
             proj = GameObject.Find("Player").GetComponent<PlayerProjectileFire>();
             //Cursor.lockState = CursorLockMode.Locked;
             //Cursor.visible = false;
