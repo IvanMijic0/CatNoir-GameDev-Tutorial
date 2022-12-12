@@ -20,7 +20,7 @@ namespace Behaviours.Movement
       private bool _isAttacking;
       private Transform _originalParent;
 
-    [Header("Movement Configuration")]
+      [Header("Movement Configuration")] 
     [SerializeField] private float walkSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private GameObject groundCheckObject;
@@ -37,7 +37,6 @@ namespace Behaviours.Movement
     [SerializeField] private bool knockBacked;
 
     [Header("Animation Sprites")] 
-    [SerializeField] private Sprite jumpSprite;
     [SerializeField] private Sprite fallSprite;
     [SerializeField] private Sprite idleSprite;
     [SerializeField] private Sprite attackSprite;
@@ -51,6 +50,13 @@ namespace Behaviours.Movement
     private Vector2 _dashingDir;
     private bool _isDashing;
     private bool _canDash = true;
+
+    private static readonly int IsRunning = Animator.StringToHash("isRunning");
+    private static readonly int Fall = Animator.StringToHash("fall");
+    private static readonly int Dash = Animator.StringToHash("dash");
+    private static readonly int Damage = Animator.StringToHash("damage");
+    private static readonly int Attack = Animator.StringToHash("attack");
+    private static readonly int Jump = Animator.StringToHash("jump");
 
     private void Awake()
     {
@@ -67,8 +73,11 @@ namespace Behaviours.Movement
     private void Update()
     {
       if (ApplyDash()) return;
+      
       ApplyHorizontalMovement();
       ApplyJump();
+      
+      
     }
 
     private bool ApplyDash()
@@ -76,14 +85,24 @@ namespace Behaviours.Movement
       if (Input.GetButtonDown("Dash") && _canDash)
       {
         audioManager.PlaySound(0);
-        anim.SetBool("dash", true);
+        anim.SetBool(IsRunning, false);
+        anim.SetBool(Fall, false);
+        anim.SetBool(Jump, false);
+        anim.SetBool(Dash, true);
         _isDashing = true;
         _canDash = false;
         _trailRenderer.emitting = true;
-        _dashingDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        _dashingDir = new Vector2(Input.GetAxisRaw(Axis.X.ToUnityAxis()), Input.GetAxisRaw(Axis.Y.ToUnityAxis()));
         if (_dashingDir == Vector2.zero)
         {
-          _dashingDir = new Vector2(transform.localScale.x, 0);
+          if (transform.rotation.y < 0)
+          {
+            _dashingDir = new Vector2(-transform.localScale.x, 0);
+          }
+          else
+          {
+            _dashingDir = new Vector2(transform.localScale.x, 0);
+          }
         }
         StartCoroutine(StopDashing());
       }
@@ -109,16 +128,16 @@ namespace Behaviours.Movement
         _spriteRenderer.sprite = idleSprite;
         _jumpsLeft = maxJumps;
 
-        anim.SetBool("fall", false);
-        anim.SetBool("jump", false);
+        anim.SetBool(Fall, false);
+        anim.SetBool(Jump, false);
       }
 
       if (_rigidbody2D.velocity.y < -.1f)
       {
         _spriteRenderer.sprite = fallSprite;
 
-        anim.SetBool("fall", true);
-        anim.SetBool("jump", false);
+        anim.SetBool(Fall, true);
+        anim.SetBool(Jump, false);
       }
     
       if (Input.GetButtonDown("Jump") && _jumpsLeft > 0)  
@@ -127,8 +146,8 @@ namespace Behaviours.Movement
         //_spriteRenderer.sprite = jumpSprite;
         _jumpsLeft--;
 
-        anim.SetBool("jump", true);
-        anim.SetBool("fall", false);
+        anim.SetBool(Jump, true);
+        anim.SetBool(Fall, false);
       }
       
     }
@@ -140,31 +159,32 @@ namespace Behaviours.Movement
 
     private void ApplyHorizontalMovement()
     {
-      var inputX = Input.GetAxisRaw(Axis.X.ToUnityAxis());
-      var newXVelocity =
-        knockBacked ? Mathf.Lerp(_rigidbody2D.velocity.x, 0f, Time.deltaTime * 3) : inputX * walkSpeed;
       
-      FlipSprite(inputX);
-      _rigidbody2D.SetVelocity(Axis.X, newXVelocity);
-
-      
-      
+       var inputX = Input.GetAxisRaw(Axis.X.ToUnityAxis());
+        
+        var newXVelocity = 
+          knockBacked ? Mathf.Lerp(_rigidbody2D.velocity.x, 0f, Time.deltaTime * 3) : inputX * walkSpeed;
+        
+        FlipSprite(inputX);
+        
+        _rigidbody2D.SetVelocity(Axis.X, newXVelocity);
       
         if(newXVelocity != 0f && IsGrounded() && Input.GetAxisRaw(Axis.X.ToUnityAxis()) != 0)
         {
-          anim.SetBool("isRunning", true);
-          anim.SetBool("fall", false);
+          anim.SetBool(IsRunning, true);
+          anim.SetBool(Fall, false);
         }
         else
         {
-          anim.SetBool("isRunning", false);
+          anim.SetBool(IsRunning, false);
         }
+
     }
 
     private IEnumerator StopDashing()
     {
       yield return new WaitForSeconds(dashingTime);
-      anim.SetBool("dash", false);
+      anim.SetBool(Dash, false);
       _trailRenderer.emitting = false;
       _isDashing = false;
     }
@@ -196,7 +216,7 @@ namespace Behaviours.Movement
 
     public void KnockBack(Transform t)
     {
-      anim.SetBool("damage", true);
+      anim.SetBool(Damage, true);
       var direction = center.position - t.position;
       knockBacked = true;
       _rigidbody2D.velocity = direction.normalized * knockBackVelocity;
@@ -219,16 +239,16 @@ namespace Behaviours.Movement
     {
       yield return new WaitForSeconds(knockBackTime);
       knockBacked = false;
-      anim.SetBool("damage", false);
+      anim.SetBool(Damage, false);
     }
 
     public IEnumerator AttackSprite()
     {
-      anim.SetBool("attack", true);
+      anim.SetBool(Attack, true);
       _isAttacking = true;
       _spriteRenderer.sprite = attackSprite; 
       yield return new WaitForSeconds(attackTime);
-      anim.SetBool("attack", false);
+      anim.SetBool(Attack, false);
       _isAttacking = false;
     }
     
