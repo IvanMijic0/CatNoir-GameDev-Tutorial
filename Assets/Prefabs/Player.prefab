@@ -321,7 +321,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -30.000122, y: 50}
+  m_AnchoredPosition: {x: -30, y: 50}
   m_SizeDelta: {x: 2045, y: 1448}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1391840592
@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 8236145464828381248}
   - component: {fileID: 190901265}
   - component: {fileID: 190901266}
+  - component: {fileID: 708917315}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -424,7 +425,7 @@ Transform:
   m_GameObject: {fileID: 8236145464828381254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.78, y: -3.27, z: -1.864}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8236145464902583122}
@@ -607,17 +608,7 @@ MonoBehaviour:
   groundCheckObject: {fileID: 8236145464020515041}
   maxJumps: 1
   dashingVelocity: 15
-  dashingTime: 0.15
-  center: {fileID: 2027709774}
-  knockBackVelocity: 8
-  knockBackTime: 0.5
-  knockBacked: 0
-  jumpSprite: {fileID: 21300000, guid: 1603108f0d9d89c4e9ed49907d8fdf32, type: 3}
-  fallSprite: {fileID: 21300000, guid: 169423e66e6dcf74d935025a4086e220, type: 3}
-  idleSprite: {fileID: 21300000, guid: c74385d2f37f7ed4fbc846c7d4c7d756, type: 3}
-  attackSprite: {fileID: 21300000, guid: 8f7d2d2752eef584d884362cb4e6c8b1, type: 3}
-  attackTime: 0.25
-  anim: {fileID: 0}
+  dashingTime: 0.2
 --- !u!114 &190901265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,7 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 3137706826756356165, guid: 9e2f87d70ad6ca8408917427ce61be8a, type: 3}
   launchOffset: {fileID: 473592426}
-  player: {fileID: 8236145464828381248}
+  attackTime: 0.5
 --- !u!114 &190901266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,14 +636,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1721d04515a6949b08f862ab585fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health1: {fileID: 1060065330}
-  health2: {fileID: 1391840591}
-  health3: {fileID: 20616886}
   hitPoints: 3
   delay: 5
+--- !u!114 &708917315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8236145464828381254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cc87f204051a41469a471c63862e999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {fileID: 2027709774}
+  knockBackVelocity: 8
+  knockBackTime: 0.2
+  knockBacked: 0
   anim: {fileID: 8236145464902583120}
-  playerMove: {fileID: 8236145464828381248}
-  proj: {fileID: 190901265}
 --- !u!1 &8236145464902583123
 GameObject:
   m_ObjectHideFlags: 0

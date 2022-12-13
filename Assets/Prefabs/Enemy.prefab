@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8861956249104487248}
   - component: {fileID: 4387394399140955814}
   - component: {fileID: 845410733}
+  - component: {fileID: 1335851270312692889}
   m_Layer: 0
   m_Name: Enemy_Comp
   m_TagString: Untagged
@@ -166,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 2
+  audioManager: {fileID: 0}
 --- !u!114 &845410733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +182,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 0}
   audioManager: {fileID: 0}
+--- !u!114 &1335851270312692889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8861956249104487253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e6dfa4dc884c09a8a13109e8235903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8861956249651857663
 GameObject:
   m_ObjectHideFlags: 0

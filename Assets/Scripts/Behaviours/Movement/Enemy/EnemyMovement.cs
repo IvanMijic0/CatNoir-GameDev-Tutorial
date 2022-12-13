@@ -15,16 +15,22 @@ namespace Behaviours.Movement.Enemy
         private Transform _targetWaypoint;
         private int _currentWaypointIndex ;
 
-        
         private void Awake()
+        {
+            _enemyMovement = GetComponent<EnemyMovement>();
+        }
+        
+        private void Start()
         {
             _targetWaypoint = waypoints[0];
         }
+        private EnemyMovement _enemyMovement;
 
+        
         private void Update()
         {
-            MoveToWaypoint();
-            FlipEnemy();
+            _enemyMovement.MoveToWaypoint();
+            _enemyMovement.FlipEnemy();
         }
 
         private void FlipEnemy()

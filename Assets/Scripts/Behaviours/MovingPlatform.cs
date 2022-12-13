@@ -60,9 +60,9 @@ namespace Behaviours.Movement
 
         private void OnCollisionExit2D(Collision2D other)
         {
-            var platformMovement = other.collider.GetComponent<PlayerController>();
-            if (platformMovement != null){
-                platformMovement.ResetParent();
+            var playerMovement = other.collider.GetComponent<PlayerController>();
+            if (playerMovement != null){
+                playerMovement.ResetParent();
             }
         }
         
