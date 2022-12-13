@@ -1,4 +1,3 @@
-using System;
 using Interfaces;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ namespace Behaviours.Movement
         [SerializeField] private float checkDistance = .05f;
 
         private Transform _targetWaypoint;
-        private int _currentWaypointIndex = 0;
+        private int _currentWaypointIndex;
 
         private void Start()
         {
@@ -53,7 +52,7 @@ namespace Behaviours.Movement
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            var playerMovement = other.collider.GetComponent<PlayerMovement>();
+            var playerMovement = other.collider.GetComponent<PlayerController>();
             if (playerMovement != null){
                 playerMovement.SetParent(transform);
             }
@@ -61,11 +60,13 @@ namespace Behaviours.Movement
 
         private void OnCollisionExit2D(Collision2D other)
         {
-            var platformMovement = other.collider.GetComponent<PlayerMovement>();
+            var platformMovement = other.collider.GetComponent<PlayerController>();
             if (platformMovement != null){
                 platformMovement.ResetParent();
             }
         }
+        
+       
     }
 }
 

@@ -1,33 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Behaviours.Combat.Player;
-using Behaviours.Movement;
 using Audio;
+using Behaviours.Movement.PlayerMovement;
+using UnityEngine.Serialization;
 
 namespace GUI
 {
     public class PauseMenu : MonoBehaviour
     {
        
-        [SerializeField] private GameObject PauseMenuUI;
-        [SerializeField] private GameObject OptionsMenuUI;
+        [FormerlySerializedAs("PauseMenuUI")] [SerializeField] private GameObject pauseMenuUI;
+        [FormerlySerializedAs("OptionsMenuUI")] [SerializeField] private GameObject optionsMenuUI;
         [SerializeField] private AudioSource buttonClick;
         [SerializeField] private PlayerMovement playerMove;
         [SerializeField] private PlayerProjectileFire proj;
-        
-        public static bool GamePaused = false;
-        private AudioManager audioManager;
-        private AudioSource music;
-        private AudioSource sound;
+
+        private static bool _gamePaused;
+        private AudioManager _audioManager;
+        private AudioSource _sound;
 
         void Awake()
         {
-            PauseMenuUI.SetActive(false);
-            OptionsMenuUI.SetActive(false);
-            audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-            music = GameObject.Find("Music").GetComponent<AudioSource>();
+            pauseMenuUI.SetActive(false);
+            optionsMenuUI.SetActive(false);
+            _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+            GameObject.Find("Music").GetComponent<AudioSource>();
             playerMove = GameObject.Find("Player").GetComponent<PlayerMovement>();
             proj = GameObject.Find("Player").GetComponent<PlayerProjectileFire>();
             //Cursor.lockState = CursorLockMode.Locked;
@@ -37,7 +35,7 @@ namespace GUI
         public void Update() 
         {
             if(Input.GetKeyDown(KeyCode.Escape)){
-                if(GamePaused){
+                if(_gamePaused){
                     Resume();
                 }
                 else{
@@ -48,40 +46,40 @@ namespace GUI
 
         public void Resume()
         {
-            PauseMenuUI.SetActive(false);
-            OptionsMenuUI.SetActive(false);
+            pauseMenuUI.SetActive(false);
+            optionsMenuUI.SetActive(false);
             playerMove.enabled = true;
             proj.enabled = true;
-            audioManager.audioSource.enabled = true;
+            _audioManager.audioSource.enabled = true;
             Time.timeScale = 1f;
-            GamePaused = false;
+            _gamePaused = false;
         }
 
         public void Pause()
         {
-            PauseMenuUI.SetActive(true);
-            OptionsMenuUI.SetActive(false);
+            pauseMenuUI.SetActive(true);
+            optionsMenuUI.SetActive(false);
             playerMove.enabled = false;
             proj.enabled = false;
-            audioManager.audioSource.enabled = false;
+            _audioManager.audioSource.enabled = false;
             Time.timeScale = 0f;
-            GamePaused = true;
+            _gamePaused = true;
         }
 
         public void LoadOptions()
         {
             Debug.Log("Loading Options menu...");
-            PauseMenuUI.SetActive(false);
-            OptionsMenuUI.SetActive(true);
+            pauseMenuUI.SetActive(false);
+            optionsMenuUI.SetActive(true);
         }
 
         public void Restart()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            PauseMenuUI.SetActive(false);
-            audioManager.audioSource.enabled = true;
+            pauseMenuUI.SetActive(false);
+            _audioManager.audioSource.enabled = true;
             Time.timeScale = 1f;
-            GamePaused = false;
+            _gamePaused = false;
         }
 
         public void SaveQuitGame()

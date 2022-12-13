@@ -10,23 +10,16 @@ namespace Behaviours.Movement.Enemy
     {
         [SerializeField] private PlayerHealth playerHealth;
         [SerializeField] private AudioManager audioManager;
-
-        public void Awake()
-        {
-            audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        }
-
+        
         private void OnCollisionEnter2D(Collision2D other)
         {
-            var player = other.collider.GetComponent<PlayerMovement>();
+            var player = other.collider.GetComponent<PlayerController>();
 
-            if (player != null)
-            {
-                playerHealth.hitPoints--;
-                player.KnockBack(transform);
-                Debug.Log(playerHealth.hitPoints);
-                audioManager.PlaySound(2);
-            }
+            if (player == null) return;
+            playerHealth.hitPoints--;
+            player.KnockBack(transform);
+            Debug.Log(playerHealth.hitPoints);
+            audioManager.PlaySound(2);
         }
     }
 }

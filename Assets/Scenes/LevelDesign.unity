@@ -431,6 +431,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8a3ef97ab163a47ae82c5b59af5cf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &344740778 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2027709774, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+  m_PrefabInstance: {fileID: 8236145464717255759}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &354445204 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6573776095949229317, guid: c19d955f3082fca4aa1e457b2006f767, type: 3}
@@ -5517,6 +5522,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8236145464828381254, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
   m_PrefabInstance: {fileID: 8236145464717255759}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &708917315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708917310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cc87f204051a41469a471c63862e999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {fileID: 344740778}
+  knockBackVelocity: 8
+  knockBackTime: 0.2
+  knockBacked: 0
+  anim: {fileID: 1267254744}
 --- !u!1 &737275316
 GameObject:
   m_ObjectHideFlags: 0
@@ -5891,9 +5913,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 845410733, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1066609299}
+    - target: {fileID: 845410733, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 190901266}
+    - target: {fileID: 4387394399140955814, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1066609299}
     - target: {fileID: 8861956249865624816, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -6714,9 +6744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1ff1102addf4a42aa5110bc207527a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseMenuUI: {fileID: 737275316}
-  OptionsMenuUI: {fileID: 1414158937}
-  soundEffects: {fileID: 787255820}
+  pauseMenuUI: {fileID: 737275316}
+  optionsMenuUI: {fileID: 1414158937}
   buttonClick: {fileID: 1039201761}
   playerMove: {fileID: 0}
   proj: {fileID: 0}
@@ -7393,6 +7422,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1267254744 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8236145464902583120, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+  m_PrefabInstance: {fileID: 8236145464717255759}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1267254746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8236145464902583122, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
@@ -11858,6 +11892,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -30
       objectReference: {fileID: 0}
+    - target: {fileID: 8236145464828381248, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 1267254744}
     - target: {fileID: 8236145464828381248, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
       propertyPath: catSprite
       value: 

@@ -1,10 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using System;
-using TMPro;
-using Behaviours.Movement;
+using Behaviours.Movement.PlayerMovement;
 
 namespace Behaviours.Combat.Player
 {
@@ -13,29 +10,19 @@ namespace Behaviours.Combat.Player
        
         public int hitPoints = 3;
         [SerializeField] private float delay = 5f;
-        [SerializeField] private Animator anim;
-        [SerializeField] private PlayerMovement playerMove;
-        [SerializeField] private PlayerProjectileFire proj;
 
-        public void Awake()
-        {
-            anim = GetComponentInChildren<Animator>();
-            playerMove = GameObject.Find("Player").GetComponent<PlayerMovement>();
-            proj = GameObject.Find("Player").GetComponent<PlayerProjectileFire>();
-        }
-
-        private void Update()
+        public void Defeat(Animator animator, PlayerMovement playerMovement, PlayerProjectileFire projectileFire)
         {
             if (hitPoints == 0)
             {
-                playerMove.enabled = false;
-                proj.enabled = false;
-                anim.Play("Defeated");
+                playerMovement.enabled = false;
+                projectileFire.enabled = false;
+                animator.Play("Defeated");
                 StartCoroutine(LoadLevel(delay));
             }
         }
 
-        IEnumerator LoadLevel(float delay)
+        static IEnumerator LoadLevel(float delay)
         {
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene(2);

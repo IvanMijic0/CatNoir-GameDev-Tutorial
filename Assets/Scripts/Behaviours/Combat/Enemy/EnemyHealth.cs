@@ -1,18 +1,15 @@
 using UnityEngine;
 using Audio;
-using Behaviours.Combat.Enemy;
+using UnityEngine.Serialization;
 
 namespace Behaviours.Combat.Enemy
 {
     public class EnemyHealth : MonoBehaviour
     {
         [SerializeField] private int hitPoints = 2;
-        private AudioManager audioManager;
+        [SerializeField] AudioManager audioManager;
 
-        public void Awake()
-        {
-            audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        }
+     
 
         private void OnCollisionEnter2D(Collision2D other)
         {
