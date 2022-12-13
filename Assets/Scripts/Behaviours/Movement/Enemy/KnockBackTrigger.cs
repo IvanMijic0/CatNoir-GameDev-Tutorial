@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using Behaviours.Combat.Player;
+﻿using Behaviours.Combat.Player;
 using UnityEngine;
 using Audio;
 
