@@ -2,6 +2,7 @@ using System.Collections;
 using Audio;
 using Behaviours.Combat.Player;
 using Behaviours.Movement.PlayerMovement;
+using UI;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement _playerMovement;
     private PlayerProjectileFire _projectileFire;
     private PlayerHealth _playerHealth;
+    
 
     [Header("Knock-back")] 
     [SerializeField] private Transform center;
@@ -24,9 +26,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float knockBackTime     = .2f;
     [SerializeField] private bool knockBacked;
     
-   
-    
-    [SerializeField] public Animator anim;  
+    [Header("Fading")]   
+    [SerializeField] private Fader fader;
+    [SerializeField] private float fadeTime = 2f;
+    [SerializeField] private float loadTime = .8f;
+
+    [SerializeField] private Animator anim;
     private AudioManager _audioManager;
 
     private void Awake()
@@ -37,12 +42,23 @@ public class PlayerController : MonoBehaviour
         _rigidbody2D   = GetComponent<Rigidbody2D>();
         _trailRenderer = GetComponent<TrailRenderer>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        _originalParent = transform.parent;
         _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         anim = GetComponentInChildren<Animator>();
     }
 
+    private void Start()
+    {
+        fader.FadeOutImmediate();
+        _originalParent = transform.parent;
+        StartCoroutine(LoadingWait());
+    }
+
     private void Update()
+    {
+        Mechanics();
+    }
+
+    private void Mechanics()
     {
         if (_playerMovement.ApplyDash(_trailRenderer, _rigidbody2D, anim, _audioManager)) return;
         _playerMovement.ApplyHorizontalMovement(_rigidbody2D, DirectionValue, knockBacked, anim);
@@ -50,7 +66,7 @@ public class PlayerController : MonoBehaviour
         _projectileFire.FireProjectile(anim, _projectileFire.GetIsAttacking(), _audioManager);
         _playerHealth.Defeat(anim, _playerMovement, _projectileFire);
     }
-    
+
     public void KnockBack(Transform trans)
     {
         anim.SetBool(Damage, true);
@@ -88,6 +104,11 @@ public class PlayerController : MonoBehaviour
     {
         transform.parent = _originalParent;
     }
-    
+
+    private IEnumerator LoadingWait()
+    {
+        yield return new WaitForSeconds(loadTime);
+        fader.FadeIn(fadeTime);
+    }
 
 }
