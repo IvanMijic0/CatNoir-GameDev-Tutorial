@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Behaviours.Movement
 {
-    public class MovingPlatform : MonoBehaviour, IMove
+    public class MovingPlatform : MonoBehaviour, IMove, ICollision
     {
         [SerializeField] private Transform[] waypoints;
         [SerializeField] private float speed;
@@ -50,7 +50,7 @@ namespace Behaviours.Movement
             Gizmos.DrawLine(waypoints[0].position, waypoints[1].position);
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        public void OnCollisionEnter2D(Collision2D other)
         {
             var playerMovement = other.collider.GetComponent<PlayerController>();
             if (playerMovement != null){
@@ -58,7 +58,7 @@ namespace Behaviours.Movement
             }
         }
 
-        private void OnCollisionExit2D(Collision2D other)
+        public void OnCollisionExit2D(Collision2D other)
         {
             var playerMovement = other.collider.GetComponent<PlayerController>();
             if (playerMovement != null){

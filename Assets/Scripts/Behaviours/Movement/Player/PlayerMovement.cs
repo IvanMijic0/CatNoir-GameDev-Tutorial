@@ -63,9 +63,12 @@ namespace Behaviours.Movement.PlayerMovement
 
       if (_isDashing)
       {
+        if (!IfJump(trailRenderer, anim)) return false;
+        
         rigidBody2D.velocity = _dashingDir * dashingVelocity;
         return true;
       }
+      
 
       if (IsGrounded())
       {
@@ -73,6 +76,18 @@ namespace Behaviours.Movement.PlayerMovement
       }
 
       return false;
+    }
+
+    private bool IfJump(TrailRenderer trailRenderer, Animator anim)
+    {
+      if (Input.GetButtonDown("Jump") && IsGrounded())
+      {
+        DisableDash(trailRenderer, anim);
+        _canDash = true;
+        return false;
+      }
+
+      return true;
     }
 
     public void ApplyJump(Rigidbody2D rigidBody2D, bool isAttacking, Animator anim)
@@ -134,6 +149,11 @@ namespace Behaviours.Movement.PlayerMovement
     private IEnumerator StopDashing(TrailRenderer trailRenderer, Animator anim)
     {
       yield return new WaitForSeconds(dashingTime);
+      DisableDash(trailRenderer, anim);
+    }
+
+    private void DisableDash(TrailRenderer trailRenderer, Animator anim)
+    {
       anim.SetBool(Dash, false);
       trailRenderer.emitting = false;
       _isDashing = false;

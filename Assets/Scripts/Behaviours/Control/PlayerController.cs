@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void Mechanics()
     {
-        if (_playerMovement.ApplyDash(_trailRenderer, _rigidbody2D, anim, _audioManager)) return;
+        if (_playerMovement.ApplyDash(_trailRenderer, _rigidbody2D, anim, _audioManager)){ return;}
         _playerMovement.ApplyHorizontalMovement(_rigidbody2D, DirectionValue, knockBacked, anim);
         _playerMovement.ApplyJump(_rigidbody2D, _projectileFire.GetIsAttacking(), anim);
         _projectileFire.FireProjectile(anim, _projectileFire.GetIsAttacking(), _audioManager);
