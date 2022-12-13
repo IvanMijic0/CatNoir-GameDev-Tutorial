@@ -10,7 +10,7 @@ namespace Behaviours.Movement.PlayerMovement
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
     {
-
+      
       [Header("Movement Configuration")] 
     [SerializeField] private float walkSpeed;
     [SerializeField] private float jumpForce;
@@ -80,14 +80,10 @@ namespace Behaviours.Movement.PlayerMovement
 
     private bool IfJump(TrailRenderer trailRenderer, Animator anim)
     {
-      if (Input.GetButtonDown("Jump") && IsGrounded())
-      {
-        DisableDash(trailRenderer, anim);
-        _canDash = true;
-        return false;
-      }
-
-      return true;
+      if (!Input.GetButtonDown("Jump") || !IsGrounded()) return true;
+      DisableDash(trailRenderer, anim);
+      _canDash = true;
+      return false;
     }
 
     public void ApplyJump(Rigidbody2D rigidBody2D, bool isAttacking, Animator anim)
@@ -105,16 +101,13 @@ namespace Behaviours.Movement.PlayerMovement
         anim.SetBool(Fall, true);
         anim.SetBool(Jump, false);
       }
-    
-      if (Input.GetButtonDown("Jump") && _jumpsLeft > 0)  
-      {
-        rigidBody2D.SetVelocity(Axis.Y, jumpForce);
-        _jumpsLeft--;
 
-        anim.SetBool(Jump, true);
-        anim.SetBool(Fall, false);
-      }
-      
+      if (!Input.GetButtonDown("Jump") || _jumpsLeft <= 0) return;
+      rigidBody2D.SetVelocity(Axis.Y, jumpForce);
+      _jumpsLeft--;
+
+      anim.SetBool(Jump, true);
+      anim.SetBool(Fall, false);
     }
 
     private bool IsGrounded()
@@ -143,7 +136,6 @@ namespace Behaviours.Movement.PlayerMovement
         {
           anim.SetBool(IsRunning, false);
         }
-
     }
 
     private IEnumerator StopDashing(TrailRenderer trailRenderer, Animator anim)
