@@ -11794,6 +11794,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 473592426, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.16
+      objectReference: {fileID: 0}
     - target: {fileID: 708917315, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
       propertyPath: fader
       value: 
