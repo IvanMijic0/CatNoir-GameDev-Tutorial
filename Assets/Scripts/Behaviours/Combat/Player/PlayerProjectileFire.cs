@@ -13,7 +13,7 @@ namespace Behaviours.Combat.Player
         [SerializeField] private Transform launchOffset;
 
         [Header("Attacking")]
-        [SerializeField] private float attackTime = .5f;
+        [SerializeField] private float attackTime = 2f;
 
         private bool _isAttacking;
 
