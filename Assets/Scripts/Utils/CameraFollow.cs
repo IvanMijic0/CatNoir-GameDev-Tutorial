@@ -1,35 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] float interpVelocity;
-    [SerializeField] float minDistance;
-    [SerializeField] float followDistance;
-    [SerializeField] GameObject target;
-    [SerializeField] Vector3 offset;
-    Vector3 targetPos;
-    // Use this for initialization
-    void Start () {
-        targetPos = transform.position;
+    [SerializeField] private float interpolationVelocity;
+    [SerializeField] private GameObject target;
+    [SerializeField] private Vector3 offset;
+
+    private Vector3 _targetPos;
+
+    private void Start () {
+        _targetPos = transform.position;
     }
-	
-    // Update is called once per frame
-    void FixedUpdate () {
-        if (target)
-        {
-            Vector3 posNoZ = transform.position;
-            posNoZ.z = target.transform.position.z;
 
-            Vector3 targetDirection = (target.transform.position - posNoZ);
+    private void FixedUpdate ()
+    {
+        if (!target) return;
 
-            interpVelocity = targetDirection.magnitude * 5f;
+        var position = transform.position;
+        var posNoZ = position;
+        var targetPosition = target.transform.position;
+        
+        posNoZ.z = targetPosition.z;
 
-            targetPos = transform.position + (targetDirection.normalized * interpVelocity * Time.deltaTime); 
+        var targetDirection = (targetPosition - posNoZ);
 
-            transform.position = Vector3.Lerp( transform.position, targetPos + offset, 0.25f);
+        interpolationVelocity = targetDirection.magnitude * 5f;
 
-        }
+        _targetPos = position + (targetDirection.normalized * (interpolationVelocity * Time.deltaTime)); 
+
+        position = Vector3.Lerp( position, _targetPos + offset, 0.25f);
+        transform.position = position;
     }
 }
