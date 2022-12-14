@@ -11810,6 +11810,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8236145464828381248, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: maxJumps
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8236145464828381251, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
       propertyPath: m_RootOrder
       value: 9

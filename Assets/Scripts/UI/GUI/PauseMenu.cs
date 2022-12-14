@@ -3,15 +3,14 @@ using UnityEngine.SceneManagement;
 using Behaviours.Combat.Player;
 using Audio;
 using Behaviours.Movement.PlayerMovement;
-using UnityEngine.Serialization;
 
 namespace GUI
 {
     public class PauseMenu : MonoBehaviour
     {
        
-        [FormerlySerializedAs("PauseMenuUI")] [SerializeField] private GameObject pauseMenuUI;
-        [FormerlySerializedAs("OptionsMenuUI")] [SerializeField] private GameObject optionsMenuUI;
+        [SerializeField] private GameObject pauseMenuUI;
+        [SerializeField] private GameObject optionsMenuUI;
         [SerializeField] private AudioSource buttonClick;
         [SerializeField] private PlayerMovement playerMove;
         [SerializeField] private PlayerProjectileFire proj;
