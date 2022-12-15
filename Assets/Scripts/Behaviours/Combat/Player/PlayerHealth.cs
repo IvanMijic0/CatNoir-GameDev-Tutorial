@@ -9,8 +9,8 @@ namespace Behaviours.Combat.Player
     {
        
         public int hitPoints = 3;
-        [SerializeField] private float delay = 5f;
 
+        [SerializeField] private float delay = 5f;
         public void Defeat(Animator animator, PlayerMovement playerMovement, PlayerProjectileFire projectileFire)
         {
             if (hitPoints == 0)
