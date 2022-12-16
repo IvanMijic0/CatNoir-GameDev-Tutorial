@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream:Assets/Scripts/Behaviours/Movement/Enemy/WaypointMovement.cs
 ﻿using Interfaces;
+=======
+using System;
+using Interfaces;
+>>>>>>> Stashed changes:Assets/Scripts/Behaviours/Movement/Enemy/EnemyMovement.cs
 using UnityEngine;
 
 namespace Behaviours.Movement.Enemy
