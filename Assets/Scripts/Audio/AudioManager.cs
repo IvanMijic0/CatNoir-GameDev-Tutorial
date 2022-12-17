@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Behaviours.Movement;
 
 namespace Audio
 {
@@ -10,8 +7,8 @@ namespace Audio
         [SerializeField] public AudioSource audioSource;
         [SerializeField] public AudioSource musicSource;
         [SerializeField] private AudioClip[] audioClips;
-        private float musicVolume = 1f;
-        private float soundVolume = 1f;
+        private float _musicVolume = 1f;
+        private float _soundVolume = 1f;
 
         public void Awake()
         {
@@ -21,8 +18,8 @@ namespace Audio
 
         public void Update()
         {
-            musicSource.volume = musicVolume;
-            audioSource.volume = soundVolume;
+            musicSource.volume = _musicVolume;
+            audioSource.volume = _soundVolume;
         }
 
         public void PlaySound(int clipNumber)
@@ -34,11 +31,11 @@ namespace Audio
 
         public void SetMusicVolume(float volume)
         {
-            musicVolume = volume;
+            _musicVolume = volume;
         }
         public void SetSoundVolume(float volume)
         {
-            soundVolume = volume;
+            _soundVolume = volume;
         }
     }
 }
