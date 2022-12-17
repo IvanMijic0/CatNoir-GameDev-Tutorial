@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement _playerMovement;
     private PlayerProjectileFire _projectileFire;
     private PlayerHealth _playerHealth;
+    private bool _isFaded;
     
 
     [Header("Knock-back")] 
@@ -25,8 +26,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float knockBackVelocity = 8f;
     [SerializeField] private float knockBackTime     = .2f;
     [SerializeField] private bool knockBacked;
-    
-    [Header("Fading")]   
+
+    [Header("Fading")] 
+    [SerializeField] private GameObject faderGameObject;
     [SerializeField] private Fader fader;
     [SerializeField] private float fadeTime = 2f;
     [SerializeField] private float loadTime = .8f;
@@ -52,6 +54,8 @@ public class PlayerController : MonoBehaviour
         fader.FadeOutImmediate();
         _originalParent = transform.parent;
         StartCoroutine(LoadingWait());
+        StartCoroutine(DisableFader());
+
     }
 
     private void Update()
@@ -85,7 +89,6 @@ public class PlayerController : MonoBehaviour
         var direction = center.position - trans.position;
         knockBacked = true;
         _rigidbody2D.velocity = direction.normalized * knockBackVelocity;
-        Debug.Log("Damage");
         _spriteRenderer.color = Color.red;
         StartCoroutine(FadeToWhite());
         StartCoroutine(UnKnockBack());
@@ -113,6 +116,14 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(loadTime);
         fader.FadeIn(fadeTime);
         healthBar.SetActive(true);
+        
+    }
+
+    private IEnumerator DisableFader()
+    {
+        yield return new WaitForSeconds(loadTime + 1f);
+        faderGameObject.SetActive(false);
+
     }
 
 }

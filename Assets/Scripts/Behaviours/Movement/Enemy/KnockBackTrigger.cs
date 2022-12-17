@@ -22,7 +22,6 @@ namespace Behaviours.Movement.Enemy
             if (player == null) return;
             playerHealth.hitPoints--;
             player.KnockBack(transform);
-            Debug.Log(playerHealth.hitPoints);
             audioManager.PlaySound(2);
         }
     }
