@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Audio;
+
 
 namespace Behaviours
 {
@@ -10,13 +9,14 @@ namespace Behaviours
         [SerializeField] private GameObject jumpPad;
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private Sprite buttonPressed;
+        [SerializeField] private Collider2D collider2D;
 
-        private SpriteRenderer spriteRenderer;
+        private SpriteRenderer _spriteRenderer;
 
         public void Awake()
         {
             audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             //spriteRenderer.sprite = redButton;
         }
 
@@ -24,9 +24,10 @@ namespace Behaviours
         {
             if(other.gameObject.CompareTag("Projectile"))
             {
-                this.gameObject.GetComponent<Collider2D>().isTrigger = false;
-                spriteRenderer.sprite = buttonPressed;
+                gameObject.GetComponent<Collider2D>().isTrigger = false;
+                _spriteRenderer.sprite = buttonPressed;
                 audioManager.PlaySound(4);
+                collider2D.enabled = true;
                 jumpPad.transform.Translate(Vector2.up * 0.3f);
             }
         }

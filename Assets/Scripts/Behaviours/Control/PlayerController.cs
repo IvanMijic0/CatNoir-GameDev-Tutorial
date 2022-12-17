@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         _playerMovement.ApplyHorizontalMovement(_rigidbody2D, DirectionValue, knockBacked, anim);
         _playerMovement.ApplyJump(_rigidbody2D, _projectileFire.GetIsAttacking(), anim);
         _projectileFire.FireProjectile(anim, _projectileFire.GetIsAttacking(), _audioManager);
-        _playerHealth.Defeat(anim, _playerMovement, _projectileFire);
+        _playerHealth.Defeat(anim, _playerMovement, _projectileFire, _rigidbody2D);
     }
 
    
