@@ -28,7 +28,7 @@ namespace UI
             return Fade(0, time);
         }
 
-        public Coroutine Fade(float target, float time)
+        private Coroutine Fade(float target, float time)
         {
             if (_currentlyActiveFade != null)
             {

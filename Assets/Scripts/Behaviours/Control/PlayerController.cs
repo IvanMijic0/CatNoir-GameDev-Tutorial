@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float loadTime = .8f;
 
     [SerializeField] private Animator anim;
+    [SerializeField] private GameObject healthBar;
     private AudioManager _audioManager;
 
     private void Awake()
@@ -111,6 +112,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(loadTime);
         fader.FadeIn(fadeTime);
+        healthBar.SetActive(true);
     }
 
 }
