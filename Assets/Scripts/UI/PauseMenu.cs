@@ -77,7 +77,7 @@ namespace GUI
 
         public void Restart()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(0);
             pauseMenuUI.SetActive(false);
             _audioManager.audioSource.enabled = true;
             Time.timeScale = 1f;
@@ -87,7 +87,7 @@ namespace GUI
         public void SaveQuitGame()
         {
             Debug.Log("Quitting game...");
-            SceneManager.LoadScene(0);
+            Application.Quit();
         }
 
         public void ButtonClick()
