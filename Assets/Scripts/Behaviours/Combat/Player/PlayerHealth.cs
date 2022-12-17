@@ -11,21 +11,26 @@ namespace Behaviours.Combat.Player
        
         public int hitPoints = 3;
         public Transform catSprite;
-        [SerializeField] private float delay = 5f;
+        private PlayerController _playerController;
+        
+        [SerializeField] private float delay = .5f;
 
         void Awake()
         {
             catSprite = GameObject.Find("CatSprite").GetComponent<Transform>();
+            _playerController = GetComponent<PlayerController>();
         }
-        void Update(){}
+   
 
-        public void Defeat(Animator animator, PlayerMovement playerMovement, PlayerProjectileFire projectileFire)
+        public void Defeat(Animator animator, PlayerMovement playerMovement, PlayerProjectileFire projectileFire, Rigidbody2D rigidBody2D)
         {
             if (hitPoints == 0)
             {
                 catSprite.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, 0f);
                 playerMovement.enabled = false;
                 projectileFire.enabled = false;
+                _playerController.enabled = false;
+                rigidBody2D.velocity = Vector2.zero;
                 animator.Play("Defeated");
                 StartCoroutine(LoadLevel(delay));
             }
