@@ -15,6 +15,7 @@ namespace GUI
         
         [SerializeField] private AudioSource buttonClick;
         [SerializeField] private PlayerMovement playerMove;
+        [SerializeField] private PlayerController playerController;
         [SerializeField] private PlayerProjectileFire proj;
         [SerializeField] private GameObject healthBar;
 
@@ -50,6 +51,7 @@ namespace GUI
             optionsMenuUI.SetActive(false);
             healthBar.SetActive(true);
             playerMove.enabled = true;
+            playerController.enabled = true;
             proj.enabled = true;
             _audioManager.audioSource.enabled = true;
             Time.timeScale = 1f;
@@ -62,6 +64,7 @@ namespace GUI
             optionsMenuUI.SetActive(false);
             healthBar.SetActive(false);
             playerMove.enabled = false;
+            playerController.enabled = false;
             proj.enabled = false;
             _audioManager.audioSource.enabled = false;
             Time.timeScale = 0f;
