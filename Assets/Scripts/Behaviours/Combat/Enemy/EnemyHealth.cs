@@ -7,10 +7,10 @@ namespace Behaviours.Combat.Enemy
     public class EnemyHealth : MonoBehaviour
     {
         [SerializeField] private int hitPoints = 2;
-        [SerializeField] AudioManager audioManager;
+        [SerializeField] private AudioManager audioManager;
 
 
-        void Awake()
+        private void Awake()
         {
             audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         }
@@ -20,7 +20,7 @@ namespace Behaviours.Combat.Enemy
             if(other.gameObject.CompareTag("Projectile")){
                 if (gameObject != null){
                     hitPoints--;
-                    audioManager.PlaySound(2);
+                    audioManager.PlaySound(7);
                 }
             }
         }

@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using Audio;
+using UnityEngine.SceneManagement;
 
 
 public class Wolf : MonoBehaviour
@@ -7,9 +9,11 @@ public class Wolf : MonoBehaviour
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private float titleDelay = 2.5f;
 
     private Rigidbody2D _rigidbody2D;
     private Animator _playerAnim;
+    
     
     private static readonly int Grabbing = Animator.StringToHash("Grabbing");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
@@ -37,10 +41,12 @@ public class Wolf : MonoBehaviour
         _playerAnim.SetBool(IsRunning, false);
         animator.SetBool(Grabbing, true);
         audioManager.PlaySound(6);
+        StartCoroutine(TitleScreen());
     }
 
-    // private IEnumerator TitleScreen()
-    // {
-    //     SceneManager.LoadScene();
-    // }
+    private IEnumerator TitleScreen()
+    {
+        yield return new WaitForSeconds(titleDelay);
+        SceneManager.LoadScene(0);
+    }
 }
