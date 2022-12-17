@@ -10868,7 +10868,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ba8f691ca5b94b2b8a2b123798c45ec9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.17
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -11536,7 +11536,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4d548079c4d24a28b7e6e3ac0cec77ae, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.564
+  m_Volume: 0.43
   m_Pitch: 0.96
   Loop: 0
   Mute: 0
@@ -11632,6 +11632,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 845410733, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1066609299}
+    - target: {fileID: 845410733, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 190901266}
     - target: {fileID: 8861956249865624816, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -16050,11 +16058,55 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1335851270312692889, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+--- !u!114 &1907337495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 845410733, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+  m_PrefabInstance: {fileID: 802150846}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76a86f886a642cca40256d9fc0c8684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1907337497 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8861956249104487248, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+  m_PrefabInstance: {fileID: 802150846}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49576c7b183345ccb93c5c50db03c180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1940633049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8861956249104487252, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
   m_PrefabInstance: {fileID: 766973883}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1940633050 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 845410733, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+  m_PrefabInstance: {fileID: 766973883}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76a86f886a642cca40256d9fc0c8684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1940633052 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8861956249104487248, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+  m_PrefabInstance: {fileID: 766973883}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49576c7b183345ccb93c5c50db03c180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1953009441
 GameObject:
   m_ObjectHideFlags: 0
@@ -16676,6 +16728,28 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &2129356843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 845410733, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+  m_PrefabInstance: {fileID: 1864183219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129356833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76a86f886a642cca40256d9fc0c8684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2129356845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8861956249104487248, guid: 9bf39a872643c2c4b92eb75d32dc8b8a, type: 3}
+  m_PrefabInstance: {fileID: 1864183219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129356833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49576c7b183345ccb93c5c50db03c180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4900628439269478484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17158,6 +17232,38 @@ PrefabInstance:
       propertyPath: hitPoints
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 190901266, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: enemyMovement.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 190901266, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: enemyKnockback.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 190901266, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: enemyMovement.Array.data[0]
+      value: 
+      objectReference: {fileID: 1907337497}
+    - target: {fileID: 190901266, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: enemyMovement.Array.data[1]
+      value: 
+      objectReference: {fileID: 1940633052}
+    - target: {fileID: 190901266, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: enemyMovement.Array.data[2]
+      value: 
+      objectReference: {fileID: 2129356845}
+    - target: {fileID: 190901266, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: enemyKnockback.Array.data[0]
+      value: 
+      objectReference: {fileID: 1907337495}
+    - target: {fileID: 190901266, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: enemyKnockback.Array.data[1]
+      value: 
+      objectReference: {fileID: 1940633050}
+    - target: {fileID: 190901266, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: enemyKnockback.Array.data[2]
+      value: 
+      objectReference: {fileID: 2129356843}
     - target: {fileID: 425785205, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
       propertyPath: m_IsActive
       value: 1

@@ -1,6 +1,8 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using Behaviours.Movement.Enemy;
 using Behaviours.Movement.PlayerMovement;
 
 
@@ -14,6 +16,7 @@ namespace Behaviours.Combat.Player
         private PlayerController _playerController;
         
         [SerializeField] private float delay = .5f;
+        [SerializeField] private List<WaypointMovement> enemyMovement;
 
         void Awake()
         {
@@ -24,19 +27,23 @@ namespace Behaviours.Combat.Player
 
         public void Defeat(Animator animator, PlayerMovement playerMovement, PlayerProjectileFire projectileFire, Rigidbody2D rigidBody2D)
         {
-            if (hitPoints == 0)
+            if (hitPoints != 0) return;
+
+            foreach (WaypointMovement enemy in enemyMovement)
             {
-                catSprite.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, 0f);
-                playerMovement.enabled = false;
-                projectileFire.enabled = false;
-                _playerController.enabled = false;
-                rigidBody2D.velocity = Vector2.zero;
-                animator.Play("Defeated");
-                StartCoroutine(LoadLevel(delay));
+                enemy.enabled = false;
             }
+            
+            catSprite.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, 0f);
+            playerMovement.enabled = false;
+            projectileFire.enabled = false;
+            _playerController.enabled = false;
+            rigidBody2D.velocity = Vector2.zero;
+            animator.Play("Defeated");
+            StartCoroutine(LoadLevel(delay));
         }
 
-        static IEnumerator LoadLevel(float delay)
+        private static IEnumerator LoadLevel(float delay)
         {
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene(2);
