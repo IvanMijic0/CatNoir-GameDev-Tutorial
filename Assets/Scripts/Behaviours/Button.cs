@@ -6,7 +6,6 @@ namespace Behaviours
 {
     public class Button : MonoBehaviour
     {
-        [SerializeField] private GameObject jumpPad;
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private Sprite buttonPressed;
         [SerializeField] private Collider2D collider2D;
@@ -28,7 +27,6 @@ namespace Behaviours
                 _spriteRenderer.sprite = buttonPressed;
                 audioManager.PlaySound(4);
                 collider2D.enabled = true;
-                jumpPad.transform.Translate(Vector2.up * 0.3f);
             }
         }
     }

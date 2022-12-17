@@ -9,7 +9,7 @@ public class Wolf : MonoBehaviour
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private float titleDelay = 2.5f;
+    [SerializeField] private float titleDelay = 3.5f;
 
     private Rigidbody2D _rigidbody2D;
     private Animator _playerAnim;
