@@ -2,6 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Behaviours.Movement.Enemy;
 using Behaviours.Movement.PlayerMovement;
 
@@ -29,7 +30,7 @@ namespace Behaviours.Combat.Player
         {
             if (hitPoints != 0) return;
 
-            foreach (WaypointMovement enemy in enemyMovement)
+            foreach (var enemy in enemyMovement.Where(enemy => enemy != null))
             {
                 enemy.enabled = false;
             }
