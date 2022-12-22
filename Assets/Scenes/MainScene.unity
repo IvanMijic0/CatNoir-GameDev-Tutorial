@@ -13968,6 +13968,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1066609299}
     - target: {fileID: 1902164125, guid: 6ebabfb27f2ecb94c9fe6478a0b855dd, type: 3}
+      propertyPath: controlDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1902164125, guid: 6ebabfb27f2ecb94c9fe6478a0b855dd, type: 3}
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 708917313}
@@ -14024,8 +14028,16 @@ PrefabInstance:
       value: Wolf Grab
       objectReference: {fileID: 0}
     - target: {fileID: 7911844837146087148, guid: 6ebabfb27f2ecb94c9fe6478a0b855dd, type: 3}
+      propertyPath: m_Size.y
+      value: 6.547012
+      objectReference: {fileID: 0}
+    - target: {fileID: 7911844837146087148, guid: 6ebabfb27f2ecb94c9fe6478a0b855dd, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7911844837146087148, guid: 6ebabfb27f2ecb94c9fe6478a0b855dd, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.409692
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ebabfb27f2ecb94c9fe6478a0b855dd, type: 3}

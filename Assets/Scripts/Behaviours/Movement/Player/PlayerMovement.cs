@@ -129,7 +129,7 @@ namespace Behaviours.Movement.PlayerMovement
             if(IsRunningning) animator.SetBool("IsRunning", true); else animator.SetBool("IsRunning", false);
     }*/
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
       return _groundCheck.Check();
     }
