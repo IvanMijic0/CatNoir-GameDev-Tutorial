@@ -1182,6 +1182,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 989486221}
     m_Modifications:
+    - target: {fileID: 3410607951309263167, guid: 81175c773dd162444822d6ea48eb57cf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -20
+      objectReference: {fileID: 0}
     - target: {fileID: 3410607951413235050, guid: 81175c773dd162444822d6ea48eb57cf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17183,6 +17187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8236145464902583120, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0c1d675959e714341b3b9defdabab333, type: 2}
     - target: {fileID: 8236145464902583121, guid: 34e6650aa176d9d49a8beeaf22bf375b, type: 3}
       propertyPath: m_Sprite
       value: 

@@ -40,7 +40,7 @@ namespace Behaviours.Combat.Player
             projectileFire.enabled = false;
             _playerController.enabled = false;
             rigidBody2D.velocity = Vector2.zero;
-            animator.Play("Defeated");
+            animator.SetTrigger("defeated");
             StartCoroutine(LoadLevel(delay));
         }
 

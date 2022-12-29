@@ -33,14 +33,10 @@ namespace Behaviours.Movement.PlayerMovement
     private static readonly int Dash = Animator.StringToHash("dash");
     private static readonly int Jump = Animator.StringToHash("jump");
 
-    //public Animator animator;
-
 
     private void Awake()
     {
       _groundCheck   = groundCheckObject.GetComponent<ICheck>();
-      
-      //animator = GetComponentInChildren<Animator>();
     }
 
     public bool ApplyDash(TrailRenderer trailRenderer, Rigidbody2D rigidBody2D, Animator anim, AudioManager audioManager)
@@ -101,14 +97,12 @@ namespace Behaviours.Movement.PlayerMovement
     public void ApplyJump(Rigidbody2D rigidBody2D, bool isAttacking, Animator anim)
     {
       if (IsGrounded() && rigidBody2D.velocity.y <= 0 && !isAttacking){
-        //ApplyAnimations(false, false, false, false);
         anim.SetBool(Jump, false);
         anim.SetBool(Fall, false);
         _jumpsLeft = maxJumps;
       }
 
       if (rigidBody2D.velocity.y < -.1f){
-        //ApplyAnimations(false, true, false, false);
         anim.SetBool(Jump, false);
         anim.SetBool(Fall, true);
       }
@@ -116,18 +110,9 @@ namespace Behaviours.Movement.PlayerMovement
       if (!Input.GetButtonDown("Jump") || _jumpsLeft <= 0) return;
       rigidBody2D.SetVelocity(Axis.Y, jumpForce);
       _jumpsLeft--;
-      //ApplyAnimations(true, false, false, false);
       anim.SetBool(Jump, true);
       anim.SetBool(Fall, false);
     }
-
-    /*private void ApplyAnimations(bool jumping, bool FallFalling, bool dashing, bool IsRunningning)
-    {
-            if(jumping) animator.SetBool("jump", true);else animator.SetBool("jump", false);
-            if(FallFalling) animator.SetBool("FallFall", true);else animator.SetBool("FallFall", false);
-            if(dashing) animator.SetBool("dash", true);else animator.SetBool("dash", false);
-            if(IsRunningning) animator.SetBool("IsRunning", true); else animator.SetBool("IsRunning", false);
-    }*/
 
     public bool IsGrounded()
     {
