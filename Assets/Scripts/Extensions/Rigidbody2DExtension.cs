@@ -5,6 +5,7 @@ namespace Extensions
 {
     public static class Rigidbody2DExtension
     {
+        // Modified for convenience, if we only want to set the x axis of the velocity
         public static void SetVelocity(this Rigidbody2D rigidbody2D, Axis axis, float value)
         {
             var oldVelocity = rigidbody2D.velocity;

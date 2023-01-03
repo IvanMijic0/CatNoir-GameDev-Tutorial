@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,15 +5,14 @@ namespace GUI
 {
     public class StartMenu : MonoBehaviour
     {
-        public static bool GamePaused = false;
-        [SerializeField] private GameObject StartMenuUI;
-        [SerializeField] private GameObject OptionsMenuUI;
+        [SerializeField] private GameObject startMenuUI;
+        [SerializeField] private GameObject optionsMenuUI;
         [SerializeField] private AudioSource buttonClick;
 
-        void Start()
+        private void Start()
         {
-            StartMenuUI.SetActive(true);
-            OptionsMenuUI.SetActive(false);
+            startMenuUI.SetActive(true);
+            optionsMenuUI.SetActive(false);
         }
 
         public void StartGame()
@@ -25,15 +22,15 @@ namespace GUI
 
         public void Menu()
         {
-            StartMenuUI.SetActive(true);
-            OptionsMenuUI.SetActive(false);
+            startMenuUI.SetActive(true);
+            optionsMenuUI.SetActive(false);
         }
 
         public void LoadOptions()
         {
             Debug.Log("Loading Options menu...");
-            StartMenuUI.SetActive(false);
-            OptionsMenuUI.SetActive(true);
+            startMenuUI.SetActive(false);
+            optionsMenuUI.SetActive(true);
         }
 
         public void SaveQuitGame()

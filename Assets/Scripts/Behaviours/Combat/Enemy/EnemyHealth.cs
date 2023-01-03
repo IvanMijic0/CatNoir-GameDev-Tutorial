@@ -1,6 +1,5 @@
 using UnityEngine;
 using Audio;
-using UnityEngine.Serialization;
 
 namespace Behaviours.Combat.Enemy
 {
@@ -17,12 +16,10 @@ namespace Behaviours.Combat.Enemy
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if(other.gameObject.CompareTag("Projectile")){
-                if (gameObject != null){
-                    hitPoints--;
-                    audioManager.PlaySound(7);
-                }
-            }
+            if (!other.gameObject.CompareTag("Projectile")) return;
+            if (gameObject == null) return;
+            hitPoints--;
+            audioManager.PlaySound(7);
         }
 
         public void Update()

@@ -17,11 +17,6 @@ namespace Behaviours.Movement
             _targetWaypoint = waypoints[0];
         }
 
-        private void Update()
-        {
-            MoveToWaypoint();
-        }
-
         public void MoveToWaypoint()
         {
             transform.position = Vector2.MoveTowards

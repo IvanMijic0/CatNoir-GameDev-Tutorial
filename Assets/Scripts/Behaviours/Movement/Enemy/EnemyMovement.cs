@@ -6,7 +6,7 @@ namespace Behaviours.Movement.Enemy
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
     
-    public class WaypointMovement : MonoBehaviour,  IMove
+    public class EnemyMovement : MonoBehaviour,  IMove
     {
         [SerializeField] private Transform[] waypoints;
         [SerializeField] private float speed;
@@ -15,19 +15,12 @@ namespace Behaviours.Movement.Enemy
         private Transform _targetWaypoint;
         private int _currentWaypointIndex ;
 
-   
         private void Start()
         {
             _targetWaypoint = waypoints[0];
         }
 
-        private void Update()
-        {
-            MoveToWaypoint();
-            FlipEnemy();
-        }
-
-        private void FlipEnemy()
+        public void FlipEnemy()
         {
             if (transform.position.x <= waypoints[0].position.x + checkDistance)
             {

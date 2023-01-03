@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
+  - HealthBar
+  - Fader
+  - AudioManager
+  - MenuCanvas
   layers:
   - Default
   - TransparentFX

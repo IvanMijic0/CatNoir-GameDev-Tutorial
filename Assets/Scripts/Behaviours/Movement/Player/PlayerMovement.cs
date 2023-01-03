@@ -76,7 +76,6 @@ namespace Behaviours.Movement.PlayerMovement
         rigidBody2D.velocity = _dashingDir * dashingVelocity;
         return true;
       }
-      
 
       if (IsGrounded())
       {
@@ -114,7 +113,7 @@ namespace Behaviours.Movement.PlayerMovement
       anim.SetBool(Fall, false);
     }
 
-    public bool IsGrounded()
+    private bool IsGrounded()
     {
       return _groundCheck.Check();
     }

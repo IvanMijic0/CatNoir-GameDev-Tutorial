@@ -2,6 +2,7 @@ using System.Collections;
 using Audio;
 using Behaviours.Combat.Player;
 using Behaviours.Movement.PlayerMovement;
+using GUI;
 using UI;
 using UnityEngine;
 
@@ -9,17 +10,18 @@ public class PlayerController : MonoBehaviour
 {
     private static readonly int Damage = Animator.StringToHash("damage");
     
-
     private Rigidbody2D _rigidbody2D;
     private TrailRenderer _trailRenderer;
     private SpriteRenderer _spriteRenderer;
-    private const int DirectionValue = 0;
     private Transform _originalParent;
     private PlayerMovement _playerMovement;
     private PlayerProjectileFire _projectileFire;
     private PlayerHealth _playerHealth;
+    private AudioManager _audioManager;
+    private GameObject _faderGameObject;
+    private Fader _fader;
+    private const int DirectionValue = 0;
     private bool _isFaded;
-    
 
     [Header("Knock-back")] 
     [SerializeField] private Transform center;
@@ -28,34 +30,34 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool knockBacked;
 
     [Header("Fading")] 
-    [SerializeField] private GameObject faderGameObject;
-    [SerializeField] private Fader fader;
     [SerializeField] private float fadeTime = 2f;
     [SerializeField] private float loadTime = .8f;
 
+    [Header("Animation")]
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject healthBar;
-    private AudioManager _audioManager;
-
+    
     private void Awake()
     {
+        _faderGameObject = GameObject.FindGameObjectWithTag("Fader"); 
+        _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         _playerMovement = GetComponent<PlayerMovement>();
         _projectileFire = GetComponent<PlayerProjectileFire>();
         _playerHealth = GetComponent<PlayerHealth>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _trailRenderer = GetComponent<TrailRenderer>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         anim = GetComponentInChildren<Animator>();
+        _fader = _faderGameObject.GetComponent<Fader>();
+        
     }
 
     private void Start()
     {
-        fader.FadeOutImmediate();
+        _fader.FadeOutImmediate();
         _originalParent = transform.parent;
         StartCoroutine(LoadingWait());
         StartCoroutine(DisableFader());
-
     }
 
     private void Update()
@@ -65,15 +67,29 @@ public class PlayerController : MonoBehaviour
 
     private void Mechanics()
     {
-        if (_playerMovement.ApplyDash(_trailRenderer, _rigidbody2D, anim, _audioManager)){ return;}
-        _playerMovement.ApplyHorizontalMovement(_rigidbody2D, DirectionValue, knockBacked, anim);
-        _playerMovement.ApplyJump(_rigidbody2D, _projectileFire.GetIsAttacking(), anim);
-        _projectileFire.FireProjectile(anim, _projectileFire.GetIsAttacking(), _audioManager);
-        _playerHealth.Defeat(anim, _playerMovement, _projectileFire, _rigidbody2D);
+        if (Movement()) return;
+        Combat();
     }
 
-   
-        
+    private void Combat()
+    {
+        _projectileFire.FireProjectile(anim, _projectileFire.GetIsAttacking(), _audioManager);
+        _playerHealth.Defeat(anim, _playerMovement, _projectileFire, _rigidbody2D);
+        _playerHealth.healthBar.HealthBarMechanics(_playerHealth);
+    }
+
+    private bool Movement()
+    {
+        if (_playerMovement.ApplyDash(_trailRenderer, _rigidbody2D, anim, _audioManager))
+        {
+            return true;
+        }
+
+        _playerMovement.ApplyHorizontalMovement(_rigidbody2D, DirectionValue, knockBacked, anim);
+        _playerMovement.ApplyJump(_rigidbody2D, _projectileFire.GetIsAttacking(), anim);
+        return false;
+    }
+
     private IEnumerator FadeToWhite()
     {
         while (_spriteRenderer.color != Color.white)
@@ -83,6 +99,28 @@ public class PlayerController : MonoBehaviour
         }
     } 
     
+    private IEnumerator LoadingWait()
+    {
+        yield return new WaitForSeconds(loadTime);
+        _fader.FadeIn(fadeTime);
+        healthBar.SetActive(true);
+        
+    }
+
+    private IEnumerator DisableFader()
+    {
+        yield return new WaitForSeconds(loadTime + 1f);
+        _faderGameObject.SetActive(false);
+    }
+
+    private IEnumerator UnKnockBack()
+    {
+        yield return new WaitForSeconds(knockBackTime);
+        knockBacked = false;
+        anim.SetBool(Damage, false);
+    }
+    
+        
     public void KnockBack(Transform trans)
     {
         anim.SetBool(Damage, true);
@@ -93,13 +131,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(FadeToWhite());
         StartCoroutine(UnKnockBack());
     }
-        
-    private IEnumerator UnKnockBack()
-    {
-        yield return new WaitForSeconds(knockBackTime);
-        knockBacked = false;
-        anim.SetBool(Damage, false);
-    }
+
     public void SetParent(Transform newParent)
     {
         _originalParent = transform.parent;
@@ -111,19 +143,15 @@ public class PlayerController : MonoBehaviour
         transform.parent = _originalParent;
     }
 
-    private IEnumerator LoadingWait()
+    public PlayerProjectileFire GetProjectileFire()
     {
-        yield return new WaitForSeconds(loadTime);
-        fader.FadeIn(fadeTime);
-        healthBar.SetActive(true);
-        
+        return _projectileFire;
     }
 
-    private IEnumerator DisableFader()
+    public AudioManager GetAudioManager()
     {
-        yield return new WaitForSeconds(loadTime + 1f);
-        faderGameObject.SetActive(false);
-
+        return _audioManager;
     }
+
 
 }

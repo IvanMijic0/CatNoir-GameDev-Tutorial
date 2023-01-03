@@ -1,10 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Audio;
-using Behaviours.Movement.PlayerMovement;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-
 
 public class Wolf : MonoBehaviour
 {

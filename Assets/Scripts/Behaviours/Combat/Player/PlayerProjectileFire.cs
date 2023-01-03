@@ -19,16 +19,12 @@ namespace Behaviours.Combat.Player
 
         public void FireProjectile(Animator anim, bool isAttacking, AudioManager audioManager)
         {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                if (audioManager.audioSource.enabled)
-                {
-                    StartCoroutine(AttackSprite(attackTime, anim));
-                    Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
-                    audioManager.PlaySound(1);
-                }
-            }
-            
+            if (!Input.GetButtonDown("Fire1")) return;
+            if (!audioManager.audioSource.enabled) return;
+            StartCoroutine(AttackSprite(attackTime, anim));
+            Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
+            audioManager.PlaySound(1);
+
         }
 
         private IEnumerator AttackSprite(float timeOfAttack, Animator anim)

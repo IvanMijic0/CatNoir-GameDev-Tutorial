@@ -6,41 +6,44 @@ using System.Linq;
 using Behaviours.Movement.Enemy;
 using Behaviours.Movement.PlayerMovement;
 
-
 namespace Behaviours.Combat.Player
 {
     public class PlayerHealth : MonoBehaviour
     {
-       
+        private PlayerController _playerController;
         public int hitPoints = 3;
         public Transform catSprite;
-        private PlayerController _playerController;
+        public HealthBar healthBar;
         
         [SerializeField] private float delay = .5f;
-        [SerializeField] private List<WaypointMovement> enemyMovement;
+        [SerializeField] private List<EnemyMovement> enemyMovements;
+        
+        private static readonly int Defeated = Animator.StringToHash("defeated");
 
-        void Awake()
+        private void Awake()
         {
             catSprite = GameObject.Find("CatSprite").GetComponent<Transform>();
+            healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
+            healthBar.SetMaxHitPoints(hitPoints);
             _playerController = GetComponent<PlayerController>();
         }
-   
-
+        
         public void Defeat(Animator animator, PlayerMovement playerMovement, PlayerProjectileFire projectileFire, Rigidbody2D rigidBody2D)
         {
             if (hitPoints != 0) return;
 
-            foreach (var enemy in enemyMovement.Where(enemy => enemy != null))
+            foreach (var enemyMovement in enemyMovements.Where(enemyMovement => enemyMovement != null))
             {
-                enemy.enabled = false;
+                enemyMovement.enabled = false;
             }
-            
-            catSprite.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, 0f);
+
+            var position = transform.position;
+            catSprite.transform.position = new Vector3(position.x, position.y - 0.2f, 0f);
             playerMovement.enabled = false;
             projectileFire.enabled = false;
             _playerController.enabled = false;
             rigidBody2D.velocity = Vector2.zero;
-            animator.SetTrigger("defeated");
+            animator.SetTrigger(Defeated);
             StartCoroutine(LoadLevel(delay));
         }
 

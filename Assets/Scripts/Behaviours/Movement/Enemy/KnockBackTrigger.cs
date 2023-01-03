@@ -9,7 +9,7 @@ namespace Behaviours.Movement.Enemy
         [SerializeField] private PlayerHealth playerHealth;
         [SerializeField] private AudioManager audioManager;
 
-        void Awake()
+        private void Awake()
         {
             audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
             playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
