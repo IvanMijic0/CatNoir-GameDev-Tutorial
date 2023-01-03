@@ -94,8 +94,7 @@ namespace Behaviours.Movement.PlayerMovement
         anim.SetBool(IsRunning, false);
       }
     }
-
-
+    
     private static void SetAnimation(Rigidbody2D rigidBody2D, Animator anim)
     {
       if (!(rigidBody2D.velocity.y < -.1f)) return;
@@ -122,13 +121,11 @@ namespace Behaviours.Movement.PlayerMovement
         anim.SetBool(Fall, false);
       }
 
-      if (Input.GetButtonUp("Jump") && rigidBody2D.velocity.y > 0)
-      {
-        rigidBody2D.SetVelocity(Axis.Y, jumpForce * .5f);
-        _jumpsLeft--;
-        anim.SetBool(Jump, true);
-        anim.SetBool(Fall, false);
-      }
+      if (!Input.GetButtonUp("Jump") || !(rigidBody2D.velocity.y > 0)) return;
+      rigidBody2D.SetVelocity(Axis.Y, jumpForce * .5f);
+      _jumpsLeft--;
+      anim.SetBool(Jump, true);
+      anim.SetBool(Fall, false);
     }
 
     private void HangHandler()
@@ -183,7 +180,6 @@ namespace Behaviours.Movement.PlayerMovement
 
       return false;
     }
-
     
     private IEnumerator StopDashing(TrailRenderer trailRenderer, Animator anim)
     {
