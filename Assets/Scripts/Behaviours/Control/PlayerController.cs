@@ -2,7 +2,6 @@ using System.Collections;
 using Audio;
 using Behaviours.Combat.Player;
 using Behaviours.Movement.PlayerMovement;
-using GUI;
 using UI;
 using UnityEngine;
 
@@ -80,11 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private bool Movement()
     {
-        if (_playerMovement.ApplyDash(_trailRenderer, _rigidbody2D, anim, _audioManager))
-        {
-            return true;
-        }
-
+        if (_playerMovement.ApplyDash(_trailRenderer, _rigidbody2D, anim, _audioManager)) return true;
         _playerMovement.ApplyHorizontalMovement(_rigidbody2D, DirectionValue, knockBacked, anim);
         _playerMovement.ApplyJump(_rigidbody2D, _projectileFire.GetIsAttacking(), anim);
         return false;
