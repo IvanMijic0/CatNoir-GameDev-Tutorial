@@ -7,7 +7,7 @@ namespace Behaviours
     {
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private Sprite buttonPressed;
-        [SerializeField] private Collider2D collider2D;
+        [SerializeField] private new Collider2D collider2D;
 
         private SpriteRenderer _spriteRenderer;
 

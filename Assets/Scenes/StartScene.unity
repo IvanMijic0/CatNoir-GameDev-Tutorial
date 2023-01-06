@@ -2396,8 +2396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf5d58ffab227f479ccbd4a28350eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartMenuUI: {fileID: 737275316}
-  OptionsMenuUI: {fileID: 359470948}
+  startMenuUI: {fileID: 737275316}
+  optionsMenuUI: {fileID: 359470948}
   buttonClick: {fileID: 1146173877}
 --- !u!114 &989486223
 MonoBehaviour:
