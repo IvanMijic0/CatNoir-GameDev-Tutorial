@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Behaviours.Control;
 using Behaviours.Movement.Enemy;
 using Behaviours.Movement.PlayerMovement;
 
@@ -10,13 +11,13 @@ namespace Behaviours.Combat.Player
 {
     public class PlayerHealth : MonoBehaviour
     {
+        [SerializeField] private int hitPoints = 3;
+        [SerializeField] private float delay = .5f;
+        [SerializeField] private List<EnemyController> enemyMovements;
+        
         private PlayerController _playerController;
         private Transform _catSprite;
         private HealthBar _healthBar;
-        
-        [SerializeField] private int hitPoints = 3;
-        [SerializeField] private float delay = .5f;
-        [SerializeField] private List<EnemyMovement> enemyMovements;
         
         private static readonly int Defeated = Animator.StringToHash("defeated");
         private static readonly int Fall = Animator.StringToHash("fall");
