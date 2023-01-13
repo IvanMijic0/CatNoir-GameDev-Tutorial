@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Behaviours.Control;
-using Behaviours.Movement.Enemy;
 using Behaviours.Movement.PlayerMovement;
 
 namespace Behaviours.Combat.Player
