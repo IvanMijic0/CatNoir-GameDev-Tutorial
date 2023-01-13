@@ -16,7 +16,7 @@ public class HealthBar : MonoBehaviour
     
     public void HealthBarMechanics(PlayerHealth playerHealth)
     {
-        if (playerHealth.hitPoints >= _maxHitPoints) return;
+        if (playerHealth.GetHitPoints() >= _maxHitPoints) return;
         hearts[^1].sprite = emptyHeart;
         hearts.Remove(hearts[^1]);
         _maxHitPoints--;

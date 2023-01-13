@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         _projectileFire.FireProjectile(anim, _projectileFire.GetIsAttacking(), _audioManager);
         _playerHealth.Defeat(anim, _playerMovement, _projectileFire, _rigidbody2D);
-        _playerHealth.healthBar.HealthBarMechanics(_playerHealth);
+        _playerHealth.GetHealthBar().HealthBarMechanics(_playerHealth);
     }
 
     private bool Movement()

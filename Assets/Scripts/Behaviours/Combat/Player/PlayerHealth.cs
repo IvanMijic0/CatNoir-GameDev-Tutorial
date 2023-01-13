@@ -11,20 +11,21 @@ namespace Behaviours.Combat.Player
     public class PlayerHealth : MonoBehaviour
     {
         private PlayerController _playerController;
-        public int hitPoints = 3;
-        public Transform catSprite;
-        public HealthBar healthBar;
+        private Transform _catSprite;
+        private HealthBar _healthBar;
         
+        [SerializeField] private int hitPoints = 3;
         [SerializeField] private float delay = .5f;
         [SerializeField] private List<EnemyMovement> enemyMovements;
         
         private static readonly int Defeated = Animator.StringToHash("defeated");
+        private static readonly int Fall = Animator.StringToHash("fall");
 
         private void Awake()
         {
-            catSprite = GameObject.Find("CatSprite").GetComponent<Transform>();
-            healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
-            healthBar.SetMaxHitPoints(hitPoints);
+            _catSprite = GameObject.Find("CatSprite").GetComponent<Transform>();
+            _healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
+            _healthBar.SetMaxHitPoints(hitPoints);
             _playerController = GetComponent<PlayerController>();
         }
         
@@ -38,12 +39,13 @@ namespace Behaviours.Combat.Player
             }
 
             var position = transform.position;
-            catSprite.transform.position = new Vector3(position.x, position.y - 0.2f, 0f);
+            _catSprite.transform.position = new Vector3(position.x, position.y - 0.2f, 0f);
             playerMovement.enabled = false;
             projectileFire.enabled = false;
             _playerController.enabled = false;
             rigidBody2D.velocity = Vector2.zero;
             animator.SetTrigger(Defeated);
+            animator.SetBool(Fall, false);
             StartCoroutine(LoadLevel(delay));
         }
 
@@ -51,6 +53,21 @@ namespace Behaviours.Combat.Player
         {
             yield return new WaitForSeconds(delay);
             SceneManager.LoadScene(2);
+        }
+
+        public HealthBar GetHealthBar()
+        {
+            return _healthBar;
+        }
+
+        public int GetHitPoints()
+        {
+            return hitPoints;
+        }
+
+        public void DecHitPoints()
+        {
+            hitPoints--;
         }
     }
 }

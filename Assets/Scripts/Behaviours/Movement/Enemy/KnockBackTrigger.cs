@@ -20,7 +20,7 @@ namespace Behaviours.Movement.Enemy
             var player = other.collider.GetComponent<PlayerController>();
 
             if (player == null) return;
-            playerHealth.hitPoints--;
+            playerHealth.DecHitPoints();
             player.KnockBack(transform);
             audioManager.PlaySound(2);
         }
