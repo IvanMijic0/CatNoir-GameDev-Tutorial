@@ -1,25 +1,36 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Audio
 {
     public class AudioManager : MonoBehaviour
     {
-        [SerializeField] public AudioSource audioSource;
-        [SerializeField] public AudioSource musicSource;
+        public AudioSource audioSource; 
+        public AudioSource musicSource;
+        [SerializeField] private Slider musicSlider;
+        [SerializeField] private Slider soundSlider;
         [SerializeField] private AudioClip[] audioClips;
-        private float _musicVolume = 1f;
-        private float _soundVolume = 1f;
+
 
         public void Awake()
         {
             audioSource = GameObject.Find("SoundEffects").GetComponent<AudioSource>();
-            musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
+            musicSource = musicSource.GetComponent<AudioSource>();
+        }
+
+        private void Start()
+        {
+            if (PlayerPrefs.HasKey("musicVol") && PlayerPrefs.HasKey("soundVol")) return;
+            musicSource.volume = 1f;
+            audioSource.volume = 1f;
         }
 
         public void Update()
         {
-            musicSource.volume = _musicVolume;
-            audioSource.volume = _soundVolume;
+            musicSource.volume = PlayerPrefs.GetFloat("musicVol");
+            musicSlider.value = PlayerPrefs.GetFloat("musicVol");
+            audioSource.volume = PlayerPrefs.GetFloat("soundVol");
+            soundSlider.value = PlayerPrefs.GetFloat("soundVol");
         }
 
         public void PlaySound(int clipNumber)
@@ -31,11 +42,11 @@ namespace Audio
 
         public void SetMusicVolume(float volume)
         {
-            _musicVolume = volume;
+            PlayerPrefs.SetFloat("musicVol", volume);
         }
         public void SetSoundVolume(float volume)
         {
-            _soundVolume = volume;
+            PlayerPrefs.SetFloat("soundVol", volume);
         }
     }
 }

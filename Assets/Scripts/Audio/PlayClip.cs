@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Audio
@@ -7,24 +5,21 @@ namespace Audio
     //Testing audio
     public class PlayClip : MonoBehaviour
     {
-        private AudioManager audioManager;
-        private int clipNumber;
+        private AudioManager _audioManager;
+        private int _clipNumber;
 
         public void Awake()
         {
-            audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+            _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         }
 
         public void Update()
         {
-            if(Input.inputString != ""){
-                int number;
-                bool is_a_number = int.TryParse(Input.inputString, out number);
-                if(is_a_number && number >= 0 && number < 6){
-                    Debug.Log(number);
-                    audioManager.PlaySound(number);
-                }
-            }
+            if (Input.inputString == "") return;
+            var isANumber = int.TryParse(Input.inputString, out var number);
+            if (!isANumber || number is < 0 or >= 6) return;
+            Debug.Log(number);
+            _audioManager.PlaySound(number);
         }
     }
 }

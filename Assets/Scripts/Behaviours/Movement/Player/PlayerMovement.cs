@@ -11,7 +11,7 @@ namespace Behaviours.Movement.PlayerMovement
     public class PlayerMovement : MonoBehaviour
     {
       
-    [Header("Movement Configuration")] 
+      [Header("Movement Configuration")] 
     [SerializeField] private float walkSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private GameObject groundCheckObject;
@@ -211,7 +211,7 @@ namespace Behaviours.Movement.PlayerMovement
     
     private void DashUp(Animator anim)
     {
-      if (Input.GetButtonDown("Dash") && Input.GetKey(KeyCode.W) && _canDash)
+      if (Input.GetButtonDown("Dash") && GetKeyUp() && _canDash)
       {
         anim.SetBool(IsRunning, false);
         anim.SetBool(Fall, false);
@@ -225,6 +225,11 @@ namespace Behaviours.Movement.PlayerMovement
         anim.SetBool(Jump, false);
         anim.SetBool(Dash, true);
       }
+    }
+
+    private static bool GetKeyUp()
+    {
+      return (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow));
     }
 
     private bool IfJump(TrailRenderer trailRenderer, Animator anim)

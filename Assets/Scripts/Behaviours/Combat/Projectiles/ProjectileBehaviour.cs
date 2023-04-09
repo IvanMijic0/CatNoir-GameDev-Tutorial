@@ -12,11 +12,12 @@ namespace Behaviours.Combat
 
         private void FixedUpdate()
         {
-            transform.position += transform.right * speed * Time.deltaTime;
+            var transform1 = transform;
+            transform1.position += transform1.right * (speed * Time.deltaTime);
             StartCoroutine(ProjectileDie());
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnCollisionEnter2D()
         {
             Destroy(transform.gameObject);
         }

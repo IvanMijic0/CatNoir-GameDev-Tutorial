@@ -28,14 +28,12 @@ namespace GUI
 
         public void LoadOptions()
         {
-            Debug.Log("Loading Options menu...");
             startMenuUI.SetActive(false);
             optionsMenuUI.SetActive(true);
         }
 
         public void SaveQuitGame()
         {
-            Debug.Log("Quitting game...");
             Application.Quit();
         }
 

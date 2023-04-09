@@ -59,7 +59,6 @@ namespace GUI
         
         public void LoadOptions()
         {
-            Debug.Log("Loading Options menu...");
             pauseMenuUI.SetActive(false);
             optionsMenuUI.SetActive(true);
         }
@@ -76,7 +75,6 @@ namespace GUI
 
         public void SaveQuitGame()
         {
-            Debug.Log("Quitting game...");
             Application.Quit();
         }
 
